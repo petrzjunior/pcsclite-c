@@ -1,5 +1,8 @@
 TARGET := pcsclite.out
 OBJ := pcsclite.o
+CPPFLAGS=-I/usr/include/PCSC/
+LDFLAGS=-lpcsclite -L/usr/lib/
+
 
 .PHONY: all clen
 
@@ -9,7 +12,7 @@ clean:
 	rm -r $(TARGET) $(OBJ)
 
 $(OBJ): %.o: %.c
-	$(CC) -c -o $@ $<
+	$(CC) -c -o $@ $< $(CPPFLAGS)
 
 $(TARGET): %.out: %.o
-	$(CC) -o $@ $<
+	$(CC) -o $@ $< $(LDFLAGS)
